@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>東方原型天賦分析 — 屬於自己的獨特使用說明書</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700;900&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f6f4ff;
+  --ink:#1a1335;
+  --muted:#6b6080;
+  --accent:#6b4faa;
+  --accent2:#9370d8;
+  --gold:#c9a84c;
+  --card:#ffffff;
+}
+
+/* ── RESET ── */
+html{scroll-behavior:smooth}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* ── BACKGROUND ── */
+.bg-layer{
+  position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 10% 5%, rgba(107,79,170,.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 95%, rgba(147,112,216,.08) 0%, transparent 55%),
+    radial-gradient(ellipse 40% 60% at 85% 10%, rgba(201,168,76,.07) 0%, transparent 50%),
+    radial-gradient(ellipse 55% 35% at 5% 90%, rgba(107,79,170,.06) 0%, transparent 55%);
+}
+.bg-grid{
+  position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.04;
+  background-image:linear-gradient(var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size:60px 60px;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 48px;
+  background:rgba(246,244,255,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(107,79,170,.1);
+}
+.nav-logo{
+  font-family:'Noto Serif TC',serif;
+  font-size:16px;font-weight:900;
+  color:var(--accent);
+  letter-spacing:.5px;
+  display:flex;align-items:center;gap:8px;white-space:nowrap;
+}
+.nav-logo .nav-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  flex-shrink:0;width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;font-size:14px;line-height:1;
+}
+.nav-cta{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;border-radius:50px;
+  padding:10px 24px;font-family:'Nunito',sans-serif;
+  font-size:14px;font-weight:800;cursor:pointer;
+  box-shadow:0 4px 16px rgba(107,79,170,.3);
+  transition:transform .2s,box-shadow .2s;text-decoration:none;
+  display:inline-block;position:relative;z-index:110;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(107,79,170,.4)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;z-index:1;
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:120px 24px 80px;text-align:center;
+}
+.hero-inner{max-width:780px;margin:0 auto}
+
+.tag-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(107,79,170,.1);border:1.5px solid rgba(107,79,170,.25);
+  border-radius:50px;padding:7px 18px;
+  font-size:13px;font-weight:800;color:var(--accent);
+  letter-spacing:1.5px;text-transform:uppercase;
+  margin-bottom:24px;
+  animation:fadeUp .8s ease forwards;
+}
+.hero-tag{font-family:'Noto Serif TC',serif;font-size:13px}
+
+h1.hero-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(38px,7vw,72px);
+  font-weight:900;line-height:1.2;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#1a1335 0%,var(--accent) 45%,var(--accent2) 70%,#c9a84c 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:fadeUp .8s .1s ease both;
+}
+.hero-sub{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(16px,2.5vw,22px);
+  color:var(--muted);font-weight:400;
+  margin-bottom:20px;letter-spacing:.5px;
+  animation:fadeUp .8s .15s ease both;
+}
+.hero-desc{
+  font-size:16px;color:var(--muted);line-height:1.8;
+  max-width:520px;margin:0 auto 40px;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-desc strong{color:var(--accent);font-weight:800}
+
+.hero-btns{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp .8s .3s ease both;
+}
+.btn-primary{
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  color:#fff;border:none;border-radius:16px;
+  padding:16px 36px;font-family:'Nunito',sans-serif;
+  font-size:17px;font-weight:900;cursor:pointer;
+  box-shadow:0 8px 28px rgba(107,79,170,.35);
+  transition:transform .2s,box-shadow .2s;text-decoration:none;
+  display:inline-block;
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(107,79,170,.5)}
+.btn-secondary{
+  background:transparent;color:var(--accent);
+  border:2px solid rgba(107,79,170,.35);border-radius:16px;
+  padding:16px 32px;font-family:'Nunito',sans-serif;
+  font-size:16px;font-weight:800;cursor:pointer;
+  transition:all .2s;text-decoration:none;display:inline-block;
+}
+.btn-secondary:hover{background:rgba(107,79,170,.08);border-color:var(--accent)}
+
+/* floating orbs */
+.orb{
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation:float 6s ease-in-out infinite;
+}
+.orb1{width:180px;height:180px;top:12%;left:5%;
+  background:radial-gradient(circle,rgba(107,79,170,.15),transparent 70%);
+  animation-delay:0s}
+.orb2{width:120px;height:120px;top:15%;right:8%;
+  background:radial-gradient(circle,rgba(201,168,76,.15),transparent 70%);
+  animation-delay:-2s}
+.orb3{width:90px;height:90px;bottom:20%;left:10%;
+  background:radial-gradient(circle,rgba(147,112,216,.12),transparent 70%);
+  animation-delay:-4s}
+
+/* scroll indicator */
+.scroll-hint{
+  position:fixed;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  z-index:50;transition:opacity .4s,visibility .4s;
+  opacity:.6;
+}
+.scroll-hint.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.scroll-hint span{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.scroll-arrow{width:20px;height:20px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);animation:bounce 1.4s ease-in-out infinite}
+
+/* ── HOW IT WORKS ── */
+.section{
+  position:relative;z-index:1;
+  padding:100px 24px;max-width:900px;margin:0 auto;
+}
+.sec-label{
+  font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:12px;text-align:center;
+}
+.sec-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(26px,4vw,40px);font-weight:900;
+  text-align:center;margin-bottom:16px;color:var(--ink);
+}
+.sec-desc{
+  text-align:center;color:var(--muted);font-size:15px;
+  max-width:480px;margin:0 auto 60px;line-height:1.8;
+}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px}
+.step-card{
+  background:var(--card);border:1.5px solid rgba(107,79,170,.12);
+  border-radius:20px;padding:28px 24px;
+  position:relative;overflow:hidden;
+  transition:transform .25s,box-shadow .25s;
+  box-shadow:0 2px 16px rgba(107,79,170,.06);
+}
+.step-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:0;transition:opacity .25s;
+}
+.step-card:hover{transform:translateY(-5px);box-shadow:0 12px 32px rgba(107,79,170,.15)}
+.step-card:hover::before{opacity:1}
+.step-num{
+  font-size:38px;font-weight:900;font-family:'Noto Serif TC',serif;
+  color:rgba(107,79,170,.12);line-height:1;margin-bottom:12px;
+}
+.step-icon{font-size:28px;margin-bottom:12px;display:block}
+.step-title{font-size:16px;font-weight:900;color:var(--ink);margin-bottom:8px}
+.step-text{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── FEATURES ── */
+.features-bg{
+  position:relative;z-index:1;
+  background:linear-gradient(135deg,rgba(107,79,170,.05),rgba(147,112,216,.04));
+  border-top:1px solid rgba(107,79,170,.1);
+  border-bottom:1px solid rgba(107,79,170,.1);
+  padding:100px 24px;
+}
+.features-inner{max-width:900px;margin:0 auto}
+
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-top:56px}
+.feat{
+  background:var(--card);border-radius:18px;padding:24px;
+  border:1.5px solid rgba(107,79,170,.1);
+  display:flex;flex-direction:column;gap:10px;
+  box-shadow:0 2px 12px rgba(107,79,170,.05);
+  transition:transform .2s;
+}
+.feat:hover{transform:translateY(-3px)}
+.feat-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.feat-title{font-size:15px;font-weight:900;color:var(--ink)}
+.feat-text{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* ── ELEMENTS SHOWCASE ── */
+.elements-row{
+  display:flex;justify-content:center;gap:16px;flex-wrap:wrap;
+  margin:56px 0 0;
+}
+.elem-pill{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px;border-radius:50px;
+  font-size:14px;font-weight:800;
+  border:1.5px solid;transition:transform .2s;cursor:default;
+}
+.elem-pill:hover{transform:scale(1.06)}
+.elem-wood{color:#2d7a4f;border-color:#2d7a4f44;background:#f0fdf4}
+.elem-fire{color:#c0392b;border-color:#c0392b44;background:#fef2f2}
+.elem-earth{color:#8b5e3c;border-color:#8b5e3c44;background:#fef9f0}
+.elem-metal{color:#4a5568;border-color:#4a556844;background:#f8f9fa}
+.elem-water{color:#2b5797;border-color:#2b579744;background:#eff4ff}
+
+/* ── CTA SECTION ── */
+.cta-section{
+  position:relative;z-index:1;
+  padding:100px 24px;text-align:center;
+}
+.cta-card{
+  max-width:640px;margin:0 auto;
+  background:linear-gradient(135deg,#1a1335,#3d2a70);
+  border-radius:28px;padding:60px 48px;
+  box-shadow:0 20px 60px rgba(107,79,170,.35);
+  position:relative;overflow:hidden;
+}
+.cta-card::before{
+  content:'☯';position:absolute;
+  font-size:280px;opacity:.04;
+  right:-40px;bottom:-80px;
+  font-family:'Noto Serif TC',serif;
+  color:#fff;pointer-events:none;
+  line-height:1;
+}
+.cta-label{
+  font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:16px;
+}
+.cta-title{
+  font-family:'Noto Serif TC',serif;
+  font-size:clamp(26px,5vw,40px);font-weight:900;
+  color:#fff;margin-bottom:12px;line-height:1.3;
+}
+.cta-text{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:36px;line-height:1.8}
+.cta-btn{
+  display:inline-block;
+  background:linear-gradient(135deg,#c9a84c,#e8c96e);
+  color:#1a1335;border:none;border-radius:16px;
+  padding:18px 44px;font-family:'Nunito',sans-serif;
+  font-size:18px;font-weight:900;cursor:pointer;
+  box-shadow:0 8px 28px rgba(201,168,76,.4);
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;letter-spacing:.3px;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(201,168,76,.55)}
+
+/* ── FOOTER ── */
+footer{
+  position:relative;z-index:1;
+  text-align:center;padding:36px 24px;
+  border-top:1px solid rgba(107,79,170,.1);
+  color:var(--muted);font-size:12px;line-height:1.8;
+}
+footer strong{color:var(--accent);font-weight:800}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)}}
+
+/* scroll reveal */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  nav{padding:14px 20px}
+  .nav-logo{font-size:14px}
+  .cta-card{padding:40px 28px}
+  .hero{padding:100px 16px 60px}
+}
+/* LANG TOGGLE */
+.lang-toggle{display:flex;gap:4px;background:#fff;border:1.5px solid rgba(107,79,170,.25);border-radius:50px;padding:4px;box-shadow:0 2px 10px rgba(107,79,170,.12);position:relative;z-index:105}
+.lang-btn{padding:6px 14px;border-radius:50px;border:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .2s;background:transparent;color:#9ca3af;letter-spacing:.5px}
+.lang-btn.active{background:linear-gradient(135deg,#6b4faa,#9370d8);color:#fff;box-shadow:0 2px 8px rgba(107,79,170,.3)}
+</style>
+</head>
+<body>
+
+<div class="bg-layer"></div>
+<div class="bg-grid"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-icon">☯</span>
+    <span id="navLogo">東方原型天賦分析</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="zh">中文</button>
+      <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    <a href="bazi_personality_32_2_3.html" class="nav-cta" id="navCta">立即開始 →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+
+  <div class="hero-inner">
+    <h1 class="hero-title" id="heroTitle">屬於自己的<br>獨特使用說明書</h1>
+    <p class="hero-sub" id="heroSub">五行 · 十神 · 性格密碼</p>
+    <p class="hero-desc" id="heroDesc">
+      結合<strong>東方的命理智慧</strong>，以及 <strong>AI 輔助的系統化整理</strong>，<br>
+      根據你的出生日期推算八字命盤，<br>
+      探索你的天生性格、潛能與職業方向
+    </p>
+    <div class="hero-btns">
+      <a href="bazi_personality_32_2_3.html" class="btn-primary" id="btnStart">✨ 開始我的天賦分析</a>
+      <a href="#how" class="btn-secondary" id="btnLearn">了解更多 ↓</a>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span id="scrollHintText">向下探索</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <p class="sec-label">How It Works</p>
+  <h2 class="sec-title reveal" id="howTitle">三步驟，解碼你的天賦</h2>
+  <p class="sec-desc reveal" id="howDesc">從出生日期到完整性格分析，只需幾分鐘</p>
+  <div class="steps">
+    <div class="step-card reveal">
+      <div class="step-num">01</div>
+      <span class="step-icon">📅</span>
+      <div class="step-title" id="step1t">輸入出生日期</div>
+      <div class="step-text" id="step1d">只需填入年、月、日（選填時辰），系統自動推算你的八字三柱或四柱命盤</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:.1s">
+      <div class="step-num">02</div>
+      <span class="step-icon">☯</span>
+      <div class="step-title" id="step2t">解析五行十神</div>
+      <div class="step-text" id="step2d">AI 系統分析命盤中的五行能量分布與十神特質，找出你最核心的性格優勢與潛在驅動力</div>
+    </div>
+    <div class="step-card reveal" style="transition-delay:.2s">
+      <div class="step-num">03</div>
+      <span class="step-icon">🎓</span>
+      <div class="step-title" id="step3t">獲得個人化建議</div>
+      <div class="step-text" id="step3d">取得職業發展方向、美國大學科系推薦，以及專屬的性格分析報告</div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<div class="features-bg" id="features">
+  <div class="features-inner">
+    <p class="sec-label">Features</p>
+    <h2 class="sec-title reveal" id="featTitle">全方位的天賦探索工具</h2>
+    <p class="sec-desc reveal" id="featDesc">從古老的東方智慧到現代職涯指引，一次掌握</p>
+    <div class="features-grid">
+      <div class="feat reveal">
+        <div class="feat-icon">🗺️</div>
+        <div class="feat-title" id="f1t">三柱 / 四柱命盤</div>
+        <div class="feat-text" id="f1d">依據傳統八字，以立春及節氣精確推算，支援時辰四柱分析</div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.05s">
+        <div class="feat-icon">🌟</div>
+        <div class="feat-title" id="f2t">十神性格分析</div>
+        <div class="feat-text" id="f2d">外顯、穩定、內隱特質完整解析，配合五維能量雷達圖視覺化呈現</div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.1s">
+        <div class="feat-icon">💼</div>
+        <div class="feat-title" id="f3t">職業發展方向</div>
+        <div class="feat-text" id="f3d">依據地支局勢與十神組合，推薦最適合你的職涯賽道與行業</div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.15s">
+        <div class="feat-icon">🎓</div>
+        <div class="feat-title" id="f4t">美國大學科系</div>
+        <div class="feat-text" id="f4d">依最多十神、外顯特質、日柱三層推薦，涵蓋理工商法醫文藝等全科系</div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.2s">
+        <div class="feat-icon">🌐</div>
+        <div class="feat-title" id="f5t">中英雙語</div>
+        <div class="feat-text" id="f5d">完整中英文切換，所有分析結果即時翻譯，適合國際學生使用</div>
+      </div>
+      <div class="feat reveal" style="transition-delay:.25s">
+        <div class="feat-icon">📧</div>
+        <div class="feat-title" id="f6t">報告寄送</div>
+        <div class="feat-text" id="f6d">分析完成後可將完整命盤報告寄送至個人信箱，隨時回顧</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:70px" class="reveal">
+      <p class="sec-label" style="margin-bottom:20px">Five Elements</p>
+      <h3 id="elemTitle" style="font-family:'Noto Serif TC',serif;font-size:22px;font-weight:900;margin-bottom:8px;color:var(--ink)">五行 — 宇宙的五種基本能量</h3>
+      <p id="elemDesc" style="color:var(--muted);font-size:14px;margin-bottom:24px">每個人的命盤都由這五種能量交織而成，形成獨一無二的天賦組合</p>
+      <div class="elements-row">
+        <div class="elem-pill elem-wood" id="ew">🌳 木 · 生長</div>
+        <div class="elem-pill elem-fire" id="ef">🔥 火 · 熱情</div>
+        <div class="elem-pill elem-earth" id="ee">🏔️ 土 · 穩定</div>
+        <div class="elem-pill elem-metal" id="em">⚔️ 金 · 決斷</div>
+        <div class="elem-pill elem-water" id="ewa">🌊 水 · 智慧</div>
+      </div>
+    </div>
+
+    <!-- Ten Archetypes Section -->
+    <div style="text-align:center;margin-top:70px" class="reveal">
+      <p class="sec-label" style="margin-bottom:20px" id="tgSectionLabel">Ten Archetypes</p>
+      <h3 id="tgIntroTitle" style="font-family:'Noto Serif TC',serif;font-size:22px;font-weight:900;margin-bottom:8px;color:var(--ink)">十神 — 天賦性格的十種原型</h3>
+      <p id="tgIntroDesc" style="color:var(--muted);font-size:14px;margin-bottom:32px">十神是五行與日主之間的關係，揭示你的核心性格驅動力、人際互動模式與天生的才能方向</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;text-align:left;max-width:900px;margin:0 auto" id="tgIntroGrid">
+        <div style="padding:18px 20px;border-radius:16px;background:#f5f0ff;border:1.5px solid #ddd0f9">
+          <div style="font-size:18px;font-weight:900;color:#7c3aed;margin-bottom:4px">⚡ <span id="tgSelf">自我星 · 比肩 ＆ 劫財</span></div>
+          <div style="font-size:13px;color:#6b4faa;font-weight:600;line-height:1.6" id="tgSelfDesc">獨立自主、競爭好勝、重視人際關係，天生的行動派與領導者</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:16px;background:#fff4ed;border:1.5px solid #fcd5b0">
+          <div style="font-size:18px;font-weight:900;color:#ea580c;margin-bottom:4px">🎨 <span id="tgOutput">輸出星 · 食神 ＆ 傷官</span></div>
+          <div style="font-size:13px;color:#c2510a;font-weight:600;line-height:1.6" id="tgOutputDesc">才華洋溢、創意豐富、善於表達，是藝術、創作與突破的天才</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:16px;background:#fffbeb;border:1.5px solid #fde68a">
+          <div style="font-size:18px;font-weight:900;color:#b45309;margin-bottom:4px">💰 <span id="tgWealth">財星 · 偏財 ＆ 正財</span></div>
+          <div style="font-size:13px;color:#92400e;font-weight:600;line-height:1.6" id="tgWealthDesc">務實精明、善於把握機會，在商業、財務與資源管理上天賦異稟</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:16px;background:#fff1f2;border:1.5px solid #fecdd3">
+          <div style="font-size:18px;font-weight:900;color:#dc2626;margin-bottom:4px">👑 <span id="tgAuth">官星 · 七殺 ＆ 正官</span></div>
+          <div style="font-size:13px;color:#991b1b;font-weight:600;line-height:1.6" id="tgAuthDesc">具有領導魄力與責任感，在管理、法律與社會秩序上展現天生權威</div>
+        </div>
+        <div style="padding:18px 20px;border-radius:16px;background:#eff6ff;border:1.5px solid #bfdbfe">
+          <div style="font-size:18px;font-weight:900;color:#1d4ed8;margin-bottom:4px">📚 <span id="tgWisdom">印星 · 偏印 ＆ 正印</span></div>
+          <div style="font-size:13px;color:#1e3a8a;font-weight:600;line-height:1.6" id="tgWisdomDesc">智慧深邃、學習力強、富有洞察力，是思想、教育與靈性探索的引路人</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-card reveal">
+    <p class="cta-label">Start Your Journey</p>
+    <h2 class="cta-title" id="ctaTitle">現在就開始探索<br>你的原型天賦密碼</h2>
+    <p class="cta-text" id="ctaText">
+      你的天賦從來不是終點，而是一切精彩的起點。<br>
+      只需輸入出生日期，讓東方命理智慧為你指引方向。
+    </p>
+    <a href="bazi_personality_32_2_3.html" class="cta-btn" id="ctaBtn">✨ 立即開始分析</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong>☯ 東方原型天賦分析</strong><br>
+  <span id="footerText">結合東方命理智慧與 AI 輔助系統化整理 · 以出生日期（年月日）推算命盤，供自我探索參考</span><br>
+  <span id="footerDisclaimer">⚠️ 本服務僅供職涯參考，不保證學業或就業結果</span>
+</footer>
+
+<script>
+// ── I18N ────────────────────────────────────────────────────
+const HP_I18N = {
+  zh:{
+    navLogo:'東方原型天賦分析', navCta:'立即開始 →',
+    heroTag:'☯ 東方原型天賦分析',
+    heroTitle:'屬於自己的<br>獨特使用說明書',
+    heroSub:'五行 · 十神 · 性格密碼',
+    heroDesc:'結合<strong>東方的命理智慧</strong>，以及 <strong>AI 輔助的系統化整理</strong>，<br>根據你的出生日期推算八字命盤，<br>探索你的天生性格、潛能與職業方向',
+    btnStart:'✨ 開始我的天賦分析', btnLearn:'了解更多 ↓',
+    scrollHint:'向下探索',
+    howTitle:'三步驟，解碼你的天賦', howDesc:'從出生日期到完整性格分析，只需幾分鐘',
+    step1t:'輸入出生日期', step1d:'只需填入年、月、日（選填時辰），系統自動推算你的八字三柱或四柱命盤',
+    step2t:'解析五行十神', step2d:'AI 系統分析命盤中的五行能量分布與十神特質，找出你最核心的性格優勢與潛在驅動力',
+    step3t:'獲得個人化建議', step3d:'取得職業發展方向、美國大學科系推薦，以及專屬的性格分析報告',
+    featTitle:'全方位的天賦探索工具', featDesc:'從古老的東方智慧到現代職涯指引，一次掌握',
+    f1t:'三柱 / 四柱命盤', f1d:'依據傳統八字，以立春及節氣精確推算，支援時辰四柱分析',
+    f2t:'十神性格分析', f2d:'外顯、穩定、內隱特質完整解析，配合五維能量雷達圖視覺化呈現',
+    f3t:'職業發展方向', f3d:'依據地支局勢與十神組合，推薦最適合你的職涯賽道與行業',
+    f4t:'美國大學科系', f4d:'依最多十神、外顯特質、日柱三層推薦，涵蓋理工商法醫文藝等全科系',
+    f5t:'中英雙語', f5d:'完整中英文切換，所有分析結果即時翻譯，適合國際學生使用',
+    f6t:'報告寄送', f6d:'分析完成後可將完整命盤報告寄送至個人信箱，隨時回顧',
+    elemTitle:'五行 — 宇宙的五種基本能量', elemDesc:'每個人的命盤都由這五種能量交織而成，形成獨一無二的天賦組合',
+    tgSectionLabel:'十神原型', tgIntroTitle:'十神 — 天賦性格的十種原型',
+    tgIntroDesc:'十神是五行與日主之間的關係，揭示你的核心性格驅動力、人際互動模式與天生的才能方向',
+    tgSelf:'自我星 · 比肩 ＆ 劫財', tgSelfDesc:'獨立自主、競爭好勝、重視人際關係，天生的行動派與領導者',
+    tgOutput:'輸出星 · 食神 ＆ 傷官', tgOutputDesc:'才華洋溢、創意豐富、善於表達，是藝術、創作與突破的天才',
+    tgWealth:'財星 · 偏財 ＆ 正財', tgWealthDesc:'務實精明、善於把握機會，在商業、財務與資源管理上天賦異稟',
+    tgAuth:'官星 · 七殺 ＆ 正官', tgAuthDesc:'具有領導魄力與責任感，在管理、法律與社會秩序上展現天生權威',
+    tgWisdom:'印星 · 偏印 ＆ 正印', tgWisdomDesc:'智慧深邃、學習力強、富有洞察力，是思想、教育與靈性探索的引路人',
+    ew:'🌳 木 · 生長', ef:'🔥 火 · 熱情', ee:'🏔️ 土 · 穩定', em:'⚔️ 金 · 決斷', ewa:'🌊 水 · 智慧',
+    ctaTitle:'現在就開始探索<br>你的原型天賦密碼',
+    ctaText:'你的天賦從來不是終點，而是一切精彩的起點。<br>只需輸入出生日期，讓東方命理智慧為你指引方向。',
+    ctaBtn:'✨ 立即開始分析',
+    footerText:'結合東方命理智慧與 AI 輔助系統化整理 · 以出生日期（年月日）推算命盤，供自我探索參考',
+    footerDisclaimer:'⚠️ 本服務僅供職涯參考，不保證學業或就業結果',
+  },
+  en:{
+    navLogo:'Eastern Archetype Analysis', navCta:'Start Now →',
+    heroTag:'☯ Eastern Archetype Analysis',
+    heroTitle:'Your Personal<br>Owner\'s Manual',
+    heroSub:'Five Elements · Ten Archetypes · Destiny Code',
+    heroDesc:'Uniting <strong>Eastern astrological wisdom</strong> with <strong>AI-assisted systematic analysis</strong>,<br>enter your birth date to reveal your Bazi chart<br>and explore your innate personality, talents and career direction.',
+    btnStart:'✨ Start My Analysis', btnLearn:'Learn More ↓',
+    scrollHint:'Scroll to Explore',
+    howTitle:'3 Steps to Decode Your Talents', howDesc:'From birth date to full personality analysis in minutes',
+    step1t:'Enter Your Birth Date', step1d:'Simply fill in year, month, day (and optional birth hour) — the system calculates your Three or Four Pillar Bazi chart automatically.',
+    step2t:'Analyze Five Elements & Ten Archetypes', step2d:'The AI system analyzes your Five Element energy distribution and Ten Archetypes qualities to uncover your core personality strengths and driving forces.',
+    step3t:'Receive Personalized Guidance', step3d:'Get career direction recommendations, US university major suggestions, and a personalized personality analysis report.',
+    featTitle:'A Complete Talent Exploration Tool', featDesc:'From ancient Eastern wisdom to modern career guidance — all in one place',
+    f1t:'Three / Four Pillar Chart', f1d:'Accurately calculated using traditional Bazi, Lìchūn, and solar terms — supports four-pillar analysis with birth hour.',
+    f2t:'Ten Archetypes Personality Analysis', f2d:'Full breakdown of expressive, stable, and hidden traits, visualized with a five-dimension energy radar chart.',
+    f3t:'Career Direction', f3d:'Based on branch patterns and Ten Archetypes combinations, recommends the most fitting career paths and industries for you.',
+    f4t:'US University Majors', f4d:'Three-tier recommendations by dominant Ten Archetype, expressive traits, and day branch — covering STEM, business, law, medicine, arts and more.',
+    f5t:'Bilingual (EN / ZH)', f5d:'Full Chinese-English toggle with real-time translation of all analysis results — ideal for international students.',
+    f6t:'Email Your Report', f6d:'After your analysis, send the complete chart report to your inbox for future reference.',
+    elemTitle:'Five Elements — The Five Cosmic Energies', elemDesc:'Every chart is a unique blend of these five energies, forming your one-of-a-kind talent profile.',
+    tgSectionLabel:'Ten Archetypes', tgIntroTitle:'Ten Archetypes — 10 Personality Blueprints',
+    tgIntroDesc:'The Ten Archetypes reveal how your Day Master relates to other elements — uncovering your core drives, relationship patterns, and innate strengths.',
+    tgSelf:'Self Star · Rob of Self (Bi Jian) & Competitor (Jie Cai)', tgSelfDesc:'Independent, competitive, and relationship-oriented — natural action-takers and leaders who forge their own path.',
+    tgOutput:'Output Star · Eating God (Shi Shen) & Hurting Officer (Shang Guan)', tgOutputDesc:'Overflowing with talent, creativity, and self-expression — gifted in art, innovation, and breaking new ground.',
+    tgWealth:'Wealth Star · Indirect Wealth (Pian Cai) & Direct Wealth (Zheng Cai)', tgWealthDesc:'Pragmatic and opportunity-savvy — naturally gifted in business, finance, and resource management.',
+    tgAuth:'Authority Star · Seven Killings (Qi Sha) & Direct Officer (Zheng Guan)', tgAuthDesc:'Commanding and deeply responsible — born leaders with natural authority in management, law, and social order.',
+    tgWisdom:'Wisdom Star · Indirect Resource (Pian Yin) & Direct Resource (Zheng Yin)', tgWisdomDesc:'Deeply wise, highly intuitive, and lifelong learners — guides in thought, education, and spiritual exploration.',
+    ew:'🌳 木 Mù · Wood', ef:'🔥 火 Huǒ · Fire', ee:'🏔️ 土 Tǔ · Earth', em:'⚔️ 金 Jīn · Metal', ewa:'🌊 水 Shuǐ · Water',
+    ctaTitle:'Start Exploring Your<br>Archetypal Talent Code',
+    ctaText:'Your talents are not your destination — they are where your most extraordinary story begins.<br>Just enter your birth date and let Eastern wisdom point the way.',
+    ctaBtn:'✨ Start My Analysis',
+    footerText:'Combining Eastern astrological wisdom with AI-assisted analysis · Calculated from birth date for self-exploration reference',
+    footerDisclaimer:'⚠️ For career reference only. Does not guarantee academic or employment outcomes.',
+  }
+};
+
+let LANG = 'zh';
+function switchLang(lang){
+  LANG = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>{
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  const d = HP_I18N[lang];
+  // innerHTML elements (contain HTML tags)
+  ['heroTag','heroTitle','heroSub','heroDesc','btnStart','btnLearn',
+   'ctaTitle','ctaText','ctaBtn','f1t','f2t','f3t','f4t','f5t','f6t',
+   'f1d','f2d','f3d','f4d','f5d','f6d','elemTitle','elemDesc',
+   'ew','ef','ee','em','ewa','footerText','footerDisclaimer'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.innerHTML = d[id] || el.innerHTML;
+  });
+  // textContent only
+  ['navLogo','howTitle','howDesc','step1t','step1d','step2t','step2d',
+   'step3t','step3d','featTitle','featDesc','scrollHintText',
+   'elemTitle','elemDesc',
+   'tgSectionLabel','tgIntroTitle','tgIntroDesc',
+   'tgSelf','tgSelfDesc','tgOutput','tgOutputDesc',
+   'tgWealth','tgWealthDesc','tgAuth','tgAuthDesc','tgWisdom','tgWisdomDesc'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = d[id] || el.textContent;
+  });
+  document.getElementById('navCta').textContent = d.navCta;
+  document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Bind lang buttons programmatically (reliable on file://)
+document.querySelectorAll('.lang-btn').forEach(function(b){
+  b.addEventListener('click', function(){ switchLang(b.getAttribute('data-lang')); });
+});
+
+// Bind all CTA links programmatically
+document.querySelectorAll('[href="bazi_personality_32_2_3.html"]').forEach(function(a){
+  a.addEventListener('click', function(e){
+    e.preventDefault();
+    var lang = (typeof LANG !== 'undefined' && LANG === 'en') ? '?lang=en' : '';
+    window.location.href = 'bazi_personality_32_2_3.html' + lang;
+  });
+});
+
+// Scroll hint — hide when near bottom
+const scrollHint = document.querySelector('.scroll-hint');
+window.addEventListener('scroll', ()=>{
+  const scrolled = window.scrollY + window.innerHeight;
+  const total = document.documentElement.scrollHeight;
+  if(scrolled >= total - 80){
+    scrollHint.classList.add('hidden');
+  } else {
+    scrollHint.classList.remove('hidden');
+  }
+});
+</script>
+</body>
+</html>
