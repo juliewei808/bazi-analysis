@@ -89,6 +89,54 @@ select option{background:#fff}
 @media(max-width:700px){
   #miniRadarPanel{display:none !important;}
   #stickyChart{display:none !important;}
+
+  /* Layout */
+  .wrap{padding:16px 12px 80px}
+  .hero h1{font-size:22px}
+  .hero p{font-size:13px}
+  .card{padding:16px 14px;border-radius:18px;margin-bottom:16px}
+
+  /* Input form */
+  .row1,.row2{flex-direction:column;gap:8px}
+  .field{width:100%}
+  .field input,.field select{font-size:16px}/* prevent iOS zoom */
+  .btn{width:100%;font-size:15px;padding:14px}
+
+  /* Day master */
+  .dm-hero{flex-direction:column;gap:12px}
+  .dm-illus-wrap{flex-direction:column}
+  .dm-illus{width:100px;height:100px;margin:0 auto}
+
+  /* TG chart — stack radar and legend */
+  #tgChartWrap > div:last-child{flex-direction:column !important}
+  #tgRadar{width:100% !important;height:auto !important}
+  #tgChartLegend{width:100% !important}
+
+  /* TG detail cards */
+  .tg-detail-row{grid-template-columns:1fr}
+  .tg-detail-left{flex-direction:row;min-width:unset;padding:12px 14px}
+  .tg-detail-right{padding:12px 14px}
+
+  /* Major cards — single column */
+  .major-cards{grid-template-columns:1fr !important}
+  .major-card{padding:14px}
+
+  /* Career chips wrap nicely */
+  .career-chips{gap:6px}
+  .career-chip{font-size:12px;padding:6px 10px}
+
+  /* Lang toggle */
+  .lang-toggle{top:10px;right:10px}
+
+  /* Back home button */
+  #backHomeBtn{top:10px;left:10px;font-size:12px;padding:6px 10px}
+
+  /* Result buttons */
+  .btn-home,.btn-reset{font-size:13px;padding:10px 16px}
+
+  /* Combo section */
+  .combo-chips{gap:6px}
+  .combo-chip{font-size:12px}
 }
 
 /* DM HERO */
